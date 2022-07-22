@@ -1,1 +1,21 @@
 syntax = "proto3";
+
+package login;
+option go_package="./;login";
+
+message Request{
+    string name = 1;
+    string pwd = 2;
+    string sign =3;
+}
+
+message Response{
+    string code = 1;
+    string msg = 2;
+    string data =3;
+    string token =4;
+}
+
+service LoginService{
+    rpc Login(Request) returns (Response){}
+}
