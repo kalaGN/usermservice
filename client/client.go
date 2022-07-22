@@ -30,7 +30,7 @@ func printLogin(client login.LoginServiceClient, req *login.Request) {
 		return
 	}
 
-	fmt.Println("res:" + response)
+	fmt.Println(response)
 }
 
 func main() {
