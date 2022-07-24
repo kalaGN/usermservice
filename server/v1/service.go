@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"login"
 	"net"
+	"pkg/config"
 
 	"google.golang.org/grpc"
 )
@@ -24,13 +25,15 @@ func (s *LoginService) Login(ctx context.Context, req *login.Request) (*login.Re
 }
 
 func main() {
-	l, err := net.Listen("tcp", ":8889")
+	port, _ := config.LoadPort()
+
+	l, err := net.Listen("tcp", ":"+port)
 
 	if err != nil {
 		panic(err)
 	}
 
-	fmt.Println("listen on 127.0.0.1:8889")
+	fmt.Println("listen on 127.0.0.1:" + port)
 
 	grpcServer := grpc.NewServer()
 
