@@ -1,4 +1,4 @@
-module pkg
+module config
 
 go 1.18
 

@@ -6,6 +6,7 @@ import (
 	"login"
 	"net"
 	"pkg/config"
+	"pkg/database"
 
 	"google.golang.org/grpc"
 )
@@ -25,6 +26,9 @@ func (s *LoginService) Login(ctx context.Context, req *login.Request) (*login.Re
 }
 
 func main() {
+
+	database.GetUser("aaa", "bbb")
+
 	port, _ := config.LoadPort()
 
 	l, err := net.Listen("tcp", ":"+port)
@@ -32,7 +36,6 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-
 	fmt.Println("listen on 127.0.0.1:" + port)
 
 	grpcServer := grpc.NewServer()
