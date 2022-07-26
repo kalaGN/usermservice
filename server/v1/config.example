@@ -1,0 +1,11 @@
+;正式环境 config.example 改为config.ini
+[production]
+
+server.port=8322
+
+database.host=127.0.0.1
+database.port=3306
+database.user=root
+database.password=pwd
+database.dbname=test
+
