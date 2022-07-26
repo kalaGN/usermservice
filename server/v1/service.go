@@ -27,7 +27,7 @@ func (s *LoginService) Login(ctx context.Context, req *login.Request) (*login.Re
 
 func main() {
 
-	database.GetUser("aaa", "bbb")
+	database.GetUser("afei", "e10adc3949ba59abbe56e057f20f883e")
 
 	port, _ := config.LoadPort()
 

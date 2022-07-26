@@ -23,3 +23,15 @@ func GetProduction() {
 	conf := ini.NewIniFileConfigSource(file)
 	fmt.Println(conf.Get("production"))
 }
+
+// root:pwd@tcp(ip:3306)/test
+func GetDatabaseDsn() string {
+	file := "../v1/config.ini"
+	conf := ini.NewIniFileConfigSource(file)
+	users, _ := conf.Get("production.database.user")
+	passwd, _ := conf.Get("production.database.password")
+	host, _ := conf.Get("production.database.host")
+	port, _ := conf.Get("production.database.port")
+	db, _ := conf.Get("production.database.dbname")
+	return users + ":" + passwd + "@tcp(" + host + ":" + port + ")/" + db + "?charset=utf8mb4&parseTime=True&loc=Local"
+}

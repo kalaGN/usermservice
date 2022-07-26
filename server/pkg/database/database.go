@@ -2,6 +2,7 @@ package database
 
 import (
 	"fmt"
+	"pkg/config"
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -10,7 +11,7 @@ import (
 func Conn() (db *gorm.DB, er error) {
 
 	// 参考 https://github.com/go-sql-driver/mysql#dsn-data-source-name 获取详情
-	dsn := "root:pwd@tcp(ip:3306)/test?charset=utf8mb4&parseTime=True&loc=Local"
+	dsn := config.GetDatabaseDsn()
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	fmt.Printf("Conn db=%v, err=%v\n", db, err)
 	er = err
