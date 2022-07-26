@@ -28,7 +28,7 @@ type Account struct {
 	Isdelete   string `json:isdelete`
 }
 
-func GetUser(name string, pwd string) {
+func GetUser(name string, pwd string) *Account {
 
 	db, err1 := Conn()
 	if err1 != nil {
@@ -37,8 +37,8 @@ func GetUser(name string, pwd string) {
 	account := new(Account)
 	res := db.Where("username=?", name).Where("password=?", pwd).First(account)
 
-	fmt.Println(res.Error)        //判断返回值的错误
-	fmt.Println(res.RowsAffected) //查看返回条数
-	fmt.Println("查询到的对象为", *account)
-	fmt.Println("查询到的对象为", account) //相对于上面
+	if res.RowsAffected > 0 {
+		return account
+	}
+	return nil
 }
