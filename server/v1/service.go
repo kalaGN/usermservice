@@ -2,15 +2,14 @@ package main
 
 import (
 	"context"
-	"encoding/hex"
 	"encoding/json"
 	"fmt"
 	"login"
-	"math/rand"
 	"net"
+
+	"pkg/common"
 	"pkg/config"
 	"pkg/database"
-	"time"
 
 	"google.golang.org/grpc"
 )
@@ -38,7 +37,7 @@ func (s *LoginService) Login(ctx context.Context, req *login.Request) (*login.Re
 		Code:  "1",
 		Msg:   "login success",
 		Data:  string(b),
-		Token: GenToken(),
+		Token: common.GenToken(),
 	}, nil
 }
 
@@ -64,18 +63,4 @@ func main() {
 		println(err)
 	}
 
-}
-
-func GenToken() string {
-	rand.Seed(time.Now().UnixNano())
-
-	uLen := 20
-
-	b := make([]byte, uLen)
-
-	rand.Read(b)
-
-	rand_str := hex.EncodeToString(b)[0:uLen]
-	return rand_str
-	//fmt.Println(rand_str)
 }

@@ -38,3 +38,7 @@ replace pkg/config => ../pkg/config
 require pkg/database v0.0.0
 
 replace pkg/database => ../pkg/database
+
+require pkg/common v0.0.0
+
+replace pkg/common => ../pkg/common
