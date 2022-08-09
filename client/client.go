@@ -1,3 +1,12 @@
+/*
+ * @Author: afei
+ * @Date: 2022-07-22 10:37:52
+ * @LastEditors: afei
+ * @LastEditTime: 2022-07-29 17:20:56
+ * @Description:
+ *
+ * Copyright (c) 2022 , All Rights Reserved.
+ */
 package main
 
 import (
@@ -5,17 +14,10 @@ import (
 	"flag"
 	"fmt"
 	"login"
+	"pkg/config"
 	"time"
 
 	"google.golang.org/grpc"
-)
-
-//初始化测试数据
-var (
-	dest = flag.String("dest", ":8889", "The server address in the format of host:port")
-	name = flag.String("name", "afei", "The name is login account name")
-	pwd  = flag.String("pwd", "123456", "The passwd is the login account password to login")
-	sign = flag.String("sign", "sign123123123", "The cmd is the login cmd")
 )
 
 func printLogin(client login.LoginServiceClient, req *login.Request) {
@@ -34,8 +36,9 @@ func printLogin(client login.LoginServiceClient, req *login.Request) {
 }
 
 func main() {
+	port, _ := config.LoadPort()
 	flag.Parse()
-	conn, err := grpc.Dial(*dest, grpc.WithInsecure())
+	conn, err := grpc.Dial(":"+port, grpc.WithInsecure())
 	if err != nil {
 		fmt.Printf("failed to Dial")
 	}
@@ -44,9 +47,9 @@ func main() {
 	client := login.NewLoginServiceClient(conn)
 
 	printLogin(client, &login.Request{
-		Name: *name,
-		Pwd:  *pwd,
-		Sign: *sign,
+		Name: "afei",
+		Pwd:  "pwd",
+		Sign: "sign123",
 	})
 
 }
