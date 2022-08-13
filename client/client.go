@@ -11,6 +11,8 @@ package main
 
 import (
 	"context"
+	"crypto/md5"
+	"encoding/hex"
 	"flag"
 	"fmt"
 	"login"
@@ -45,11 +47,19 @@ func main() {
 	defer conn.Close()
 
 	client := login.NewLoginServiceClient(conn)
+	originStr := "name=afei&pwd=e10adc3949ba59abbe56e057f20f883e&stime=1660364991"
+	originStr += fmt.Sprintf("&key=%v", "123")
+	fmt.Println(originStr)
 
+	h := md5.New()
+	h.Write([]byte(originStr))
+	sign := hex.EncodeToString(h.Sum(nil)[:])
+	fmt.Println(sign)
 	printLogin(client, &login.Request{
-		Name: "afei",
-		Pwd:  "pwd",
-		Sign: "sign123",
+		Name:  "afei",
+		Pwd:   "e10adc3949ba59abbe56e057f20f883e",
+		Stime: "1660364991",
+		Sign:  sign,
 	})
 
 }

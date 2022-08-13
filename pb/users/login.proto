@@ -6,7 +6,8 @@ option go_package="./;login";
 message Request{
     string name = 1;
     string pwd = 2;
-    string sign =3;
+    string stime = 3;
+    string sign =4;
 }
 
 message Response{

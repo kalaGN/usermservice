@@ -37,9 +37,8 @@ func CheckSign(params map[string]string, key string, filter string) (sign string
 	}
 
 	originStr += fmt.Sprintf("key=%v", key)
-
 	h := md5.New()
 	h.Write([]byte(originStr))
-	sign = string(h.Sum(nil))
+	sign = hex.EncodeToString(h.Sum(nil)[:])
 	return
 }

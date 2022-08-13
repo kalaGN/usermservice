@@ -18,8 +18,22 @@ type LoginService struct {
 }
 
 func (s *LoginService) Login(ctx context.Context, req *login.Request) (*login.Response, error) {
-	fmt.Printf("req name:%s, pwd:%s\n", req.Name, req.Pwd)
+	// fmt.Printf("req name:%s, pwd:%s,stime:%s,sign:%s\n", req.Name, req.Pwd, req.Stime, req.Sign)
+	var pMap = make(map[string]string)
+	pMap["name"] = req.Name
+	pMap["pwd"] = req.Pwd
+	pMap["stime"] = req.Stime
 
+	calSign := common.CheckSign(pMap, "123", "1")
+
+	if req.Sign != calSign {
+		return &login.Response{
+			Code:  "0",
+			Msg:   "login fail,sign error",
+			Data:  "",
+			Token: "",
+		}, nil
+	}
 	accountInfo := database.GetUser(req.Name, req.Pwd)
 	if accountInfo == nil {
 		return &login.Response{
