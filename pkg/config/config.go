@@ -20,7 +20,7 @@ var ConfigFuncs map[string]ConfigFunc
 
 func LoadPort() (string, error) {
 	apath := getCurrentAbPath()
-	file := apath + "/../../v1/config.ini"
+	file := apath + "/../../config.ini"
 	conf := ini.NewIniFileConfigSource(file)
 	return conf.Get("production.server.port")
 }

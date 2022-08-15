@@ -24,8 +24,8 @@ require (
 
 require login v0.0.0
 
-replace login => ../pb/users
+replace login => ../../pb/users
 
 require pkg/config v0.0.0
 
-replace pkg/config => ../server/pkg/config
+replace pkg/config => ../../pkg/config
