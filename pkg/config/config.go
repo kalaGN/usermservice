@@ -33,7 +33,7 @@ func GetProduction() {
 
 // root:pwd@tcp(ip:3306)/test
 func GetDatabaseDsn() string {
-	file := "../v1/config.ini"
+	file := "../../config.ini"
 	conf := ini.NewIniFileConfigSource(file)
 	users, _ := conf.Get("production.database.user")
 	passwd, _ := conf.Get("production.database.password")
